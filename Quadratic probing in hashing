@@ -1,0 +1,80 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class gfg
+{
+    
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while(t-- >0)
+        {
+            int hash_size = sc.nextInt();
+            int array_size = sc.nextInt();
+            
+            int arr[] = new int[array_size];
+            
+            for(int i = 0; i < array_size; i++)
+             arr[i] = sc.nextInt();
+             
+            int hash_table[] = new int[hash_size];
+            
+            for(int i = 0; i < hash_size; i++)
+             hash_table[i] = -1;
+             
+            quadraticProbing(hash_table, hash_size, arr, array_size);
+            
+            for(int i = 0; i <hash_size; i++)
+             System.out.print(hash_table[i] + " ");
+             
+             System.out.println();
+             
+        }
+    }
+    
+    
+ // } Driver Code Ends
+
+
+
+
+// Insert all the element of array arr[] (size N)
+// into the hash table hash[] (size hashSize)
+static void quadraticProbing(int hash_table[], int hash_size, int arr[], int N)
+{
+    for (int i = 0; i < N; i++) { 
+  
+            // Computing the hash value 
+            int hv = arr[i] % hash_size; 
+  
+            // Insert in the table if there 
+            // is no collision 
+            if (hash_table[hv] == -1) 
+                hash_table[hv] = arr[i]; 
+            else { 
+  
+                // If there is a collision 
+                // iterating through all 
+                // possible quadratic values 
+                for (int j = 0; j < hash_size; j++) { 
+  
+                    // Computing the new hash value 
+                    int t = (hv + j*j) % hash_size; 
+                    if (hash_table[t] == -1) { 
+  
+                        // Break the loop after 
+                        // inserting the value 
+                        // in the table 
+                        hash_table[t] = arr[i]; 
+                        break; 
+                    } 
+                } 
+            } 
+        }
+}
+
+// { Driver Code Starts.
+}  // } Driver Code Ends
