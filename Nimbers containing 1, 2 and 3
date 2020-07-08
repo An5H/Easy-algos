@@ -1,0 +1,53 @@
+ {
+	int t ;
+	cin>>t ;
+	
+	while (t--)
+	{
+	    int m ,s ;
+	    cin>>m ;
+	    vector<int> n1 ;
+	    for (int i=0 ; i<m ; i++)
+	    {
+	       cin>>s ;
+	       if(s == 0){
+	           continue;
+	       }
+	        int s1;
+	        s1 = s ;
+	        int flag = 0 ;
+ 	        while ( s != 0)
+	        {
+	            int rem = s%10 ;
+	            if (rem == 4 || rem == 5 || rem == 6 || rem == 7 || rem == 8 || rem == 9 || rem == 0)
+	            {
+	                flag = 1 ;
+	                break ;
+	            }
+	            s = s/10 ;
+	        }
+
+            if (flag == 0)
+            {
+                n1.push_back(s1) ;
+            }
+	       
+	    }  
+	    if (n1.size() == 0)
+	    {
+	        cout<<"-1" ;
+	    }
+	    else
+	    {
+	 sort(n1.begin() ,n1.end()) ;
+	for (int i=0 ; i<n1.size() ; i++)
+	{
+	    cout<<n1[i]<<" " ;
+	}
+	    }
+	cout<<endl ;
+	    
+	}
+
+	return 0;
+}
