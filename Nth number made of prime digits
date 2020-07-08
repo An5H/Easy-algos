@@ -1,0 +1,38 @@
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	     Scanner ob = new Scanner (System.in);
+	     int t = ob.nextInt();
+	     while(t-- > 0){
+	         int num = ob.nextInt();
+	         System.out.println(new check().compute(num));
+	     }
+	 }
+}
+class check{
+    static String compute(int n){
+        String num = "";
+        while(n>0) {
+            switch(n%4) {
+                case 1:
+                num = 2+num;
+                break;
+                case 2:
+                num = 3+num;
+                break;
+                case 3:
+                num = 5+num;
+                break;
+                case 0:
+                num = 7+num;
+                break;
+            }
+            n--;
+            n = n/4;
+        }
+        return num;
+    }
+}
