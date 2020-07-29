@@ -1,0 +1,60 @@
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Graph{
+    private final int V;
+    private final List<List<Integer>> adj;
+    private int count;
+    boolean visit[];
+    Graph(int V){
+        this.V=V;
+        adj=new ArrayList<>(V);
+        for(int i=0;i<V;i++){
+            adj.add(new LinkedList<>());
+        }
+        this.count=0;
+        visit=new boolean[V];
+    }
+    public void add(int s,int d){
+        adj.get(s).add(d);
+    }
+    public int helper(int s,int d){
+        visit[s]=true;
+        if(s==d){
+            count++;
+            return count;
+        }
+            
+        Iterator itr=adj.get(s).iterator();
+        while(itr.hasNext()){
+            int x=(int)itr.next();
+            if(!visit[x]){
+                visit[x]=true;
+                helper(x,d);
+                visit[x]=false;
+            }
+        }
+        return count;
+    }
+}
+class GFG {
+	public static void main (String[] args) {
+		//code
+		Scanner scan=new Scanner(System.in);
+		int t=scan.nextInt();
+		while(t-- >0){
+		    int n=scan.nextInt();
+		    int e=scan.nextInt();
+		    Graph g=new Graph(n);
+		    while(e-- >0){
+		        int s=scan.nextInt();
+		        int d=scan.nextInt();
+		        g.add(s,d);
+		    }
+		    int ts=scan.nextInt();
+		    int td=scan.nextInt();
+		    System.out.println(g.helper(ts,td));
+		}
+	}
+}
