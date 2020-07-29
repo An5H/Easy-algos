@@ -1,0 +1,71 @@
+//Initial Template for Java
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Driverclass
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int t =sc.nextInt();
+        while(t-- > 0)
+        {
+            ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+            int nov = sc.nextInt();
+            int edg  =sc.nextInt();
+            for(int i = 0; i < nov; i++)
+                list.add(i, new ArrayList<Integer>());
+                
+            for(int i = 1; i <= edg; i++)
+            {
+                int u = sc.nextInt();
+                int v = sc.nextInt();
+                list.get(u).add(v);
+                list.get(v).add(u);
+            }
+            
+            ArrayList<Integer> res = new Traversal().dfs(list, nov);
+            for (int i = 0; i < res.size (); i++) 
+                System.out.print (res.get(i) + " ");
+            System.out.println();
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+
+/*
+g : adjacency list of graph
+N : number of vertices
+
+return a list containing the DFS traversal of the given graph
+*/
+
+class Traversal
+{   
+    static ArrayList <Integer> list = new ArrayList <>();
+    static ArrayList <Integer> dfs(ArrayList<ArrayList<Integer>> g, int N)
+    {
+        list.clear();
+        return DFS(g, 0, new boolean[N]);
+    }
+    static ArrayList <Integer> DFS(ArrayList<ArrayList<Integer>> adj, int cur, boolean visited[]){
+        visited[cur] = true;
+        list.add(cur);
+        for(int i: adj.get(cur)){
+            if(!visited[i]){
+                visited[i] = true;
+                DFS(adj, i, visited);
+            }
+        }
+        return list;
+    }
+}
+
